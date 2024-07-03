@@ -2,7 +2,7 @@ The backend API for the Grief-Reminder project. A few re-implementations use dif
 <img src="https://gleam.run/images/lucy/lucy.svg" alt="lucy" width="25"/> and **[Wisp](https://gleam-wisp.github.io/wisp/)**.
 ---
 ### Running the code
-Make sure you have Gleam installed (see the link above ☝️)
+Make sure you have Gleam installed (see the link above ☝️) and then run:
 ```bash
-Gleam Run
+gleam run
 ```
