@@ -1,4 +1,4 @@
-name = "Grief Reminders API"
+name = "grief_reminders_api"
 version = "0.0.1-alpha"
 
 description = "The backend API for the Grief-Reminder project."
