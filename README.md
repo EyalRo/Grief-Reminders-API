@@ -3,6 +3,6 @@ The backend API for the Grief-Reminder project. A few re-implementations use dif
 ---
 ### Running the code
 Make sure you have Gleam installed (see the link above ☝️)
-'''bash
+```bash
 Gleam Run
-'''
+```
