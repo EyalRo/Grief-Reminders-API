@@ -1,0 +1,3 @@
+fastapi
+couchdb
+python-jose[cryptography]

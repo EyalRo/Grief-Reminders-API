@@ -1,0 +1,10 @@
+name = "stardust-api"
+compatibility_date = "2023-12-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "stardust"
+database_id = "cc510674-26c6-4b04-816a-55816993ec3a"
+
+[triggers]
+crons = ["0 0 * * *"]
