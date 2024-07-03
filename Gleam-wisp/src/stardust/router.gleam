@@ -4,8 +4,7 @@ import gleam/string_builder
 import stardust/web
 import wisp.{type Request, type Response}
 
-/// The HTTP request handler- your application!
-/// 
+// The HTTP request handler
 pub fn handle_request(req: Request) -> Response {
   // Apply the middleware stack for this request/response.
   use _req <- web.middleware(req)
