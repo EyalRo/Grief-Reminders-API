@@ -1,6 +1,6 @@
 import gleam/erlang/process
+import grief_reminders_api/router
 import mist
-import stardust/router
 import wisp
 
 pub fn main() {
