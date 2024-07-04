@@ -1,6 +1,6 @@
 import gleeunit
 import gleeunit/should
-import stardust/router
+import grief_reminders_api/router
 import wisp/testing
 
 pub fn main() {
