@@ -27,7 +27,9 @@ fn home_page(req: Request) -> Response {
 fn get_token(req: Request) -> Response {
   // Later we'll use templates, but for now a string will do.
   use <- wisp.require_method(req, Get)
-
+  // Will call https://db.ops.in.net/inactive-account/_find/
+  // Will add header -- Authorization: Basic <Long HASH == >
+  // The hash is Base64 Encode of "user:password" - Change to API specific credentials
   let html = string_builder.from_string("<h1>Hello, Joe!</h1>")
   wisp.ok()
   |> wisp.html_body(html)
