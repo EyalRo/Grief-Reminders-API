@@ -1,4 +1,4 @@
-import gleam/http.{Get, Post}
+import gleam/http.{Get}
 import gleam/string_builder
 
 import stardust/web
