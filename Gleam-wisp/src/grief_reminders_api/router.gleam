@@ -1,7 +1,8 @@
 import gleam/hackney
-import gleam/http.{Get}
+import gleam/http.{Get, Post}
 import gleam/http/request
 import gleam/http/response
+import gleam/httpc
 import gleam/io
 import gleam/result.{try}
 import gleam/string_builder
@@ -34,22 +35,10 @@ fn home_page(req: Request) -> Response {
 
 fn get_token(req: Request) -> Response {
   use <- wisp.require_method(req, Get)
-  let auth_hash = get_auth_hash()
-  io.debug(auth_hash)
 
-  // Prepare a HTTP request record
-  let assert Ok(request) =
-    request.to("https://db.ops.in.net/inactive-account/_find/")
+  io.debug(send_request("_find"))
 
-  // Get response (using basic Auth)
-  let res =
-    request
-    |> request.prepend_header("Authorization", "Basic" <> auth_hash)
-    |> hackney.send
-
-  io.debug(res)
-
-  let html = string_builder.from_string("<h1>Hello, Joe!</h1>")
+  let html = string_builder.from_string("<h1>God darnit!</h1>")
   wisp.ok()
   |> wisp.html_body(html)
 }
@@ -61,4 +50,22 @@ fn get_auth_hash() -> String {
   |> dot.load
 
   env.get_or("AUTH_HASH", "default_hash_value")
+}
+
+fn send_request(path: String) {
+  // Prepare a HTTP request record
+  let assert Ok(req) =
+    request.to("https://db.ops.in.net/inactive-account/" <> path)
+
+  // change to username:pass - maybe will work?
+
+  req
+  |> request.prepend_header("Authorization", "Basic " <> get_auth_hash())
+  |> request.prepend_header("Content-Type", "application/json")
+  |> request.set_method(Post)
+
+  // Send the HTTP request to the server
+  use resp <- result.try(httpc.send(req))
+
+  Ok(resp.body)
 }
