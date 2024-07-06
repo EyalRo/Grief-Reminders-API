@@ -6,7 +6,7 @@ pub fn get_user(email: String, password: String) {
     object([
       #(
         "selector",
-        object([#("email", string("email")), #("password", string(password))]),
+        object([#("email", string(email)), #("password", string(password))]),
       ),
     ])
 
