@@ -4,10 +4,10 @@ import gleam/hackney
 import gleam/http.{Get, Post}
 import gleam/http/request
 import gleam/io
-import gleam/json.{array, int, null, object, string}
+import gleam/json.{type Json, array, int, null, object, string}
 import gleam/result.{try}
 
-pub fn send_request(path: String) {
+pub fn send_request(path: String, params: Json) {
   dot.new()
   |> dot.set_path(".env")
   |> dot.set_debug(False)
@@ -18,7 +18,7 @@ pub fn send_request(path: String) {
   let db = env.get_or("DB", "businessy-stuff")
   let auth_hash = env.get_or("AUTH_HASH", "default_hash_value")
 
-  let db_query = json.to_string(object([#("selector", object([]))]))
+  let db_query = json.to_string(params)
 
   // Prepare a HTTP request record
   let assert Ok(req) = request.to(scheme <> host <> db <> path)

@@ -1,11 +1,11 @@
 import gleam/http.{Get, Post}
 
-import gleam/result.{or}
+import gleam/result
 import gleam/string_builder
 import grief_reminders_api/web
 import wisp.{type Request, type Response}
 
-import grief_reminders_api/utils/send_request.{send_request}
+import grief_reminders_api/db_functions.{get_user}
 
 // The HTTP request handler
 pub fn handle_request(req: Request) -> Response {
@@ -30,9 +30,12 @@ fn home_page(req: Request) -> Response {
 
 fn get_token(req: Request) -> Response {
   use <- wisp.require_method(req, Get)
-  let data = send_request("_find")
+  let data = get_user("email", "password")
 
-  let datastring = result.unwrap(data, or: "No Data")
+  let datastring =
+    result.lazy_unwrap(result.lazy_unwrap(data, fn() { Ok("No Data") }), fn() {
+      "No Data"
+    })
 
   let html = string_builder.from_string(datastring)
   wisp.ok()
