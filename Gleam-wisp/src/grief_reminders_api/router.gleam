@@ -1,6 +1,6 @@
+import gleam/dict
+import gleam/dynamic
 import gleam/http.{Get}
-import gleam/io
-
 import gleam/result
 import gleam/string_builder
 import grief_reminders_api/web
@@ -32,8 +32,9 @@ fn home_page(req: Request) -> Response {
 fn get_token(req: Request) -> Response {
   use <- wisp.require_method(req, Get)
   let data = get_user("test@test.com", "test@test.com")
-  let _ = io.debug(data)
-  let user = result.unwrap(data, "{error: get_user}")
+  let user =
+    data
+    |> result.unwrap("don't worry this is actually okay")
 
   let html = string_builder.from_string(user)
   wisp.ok()
