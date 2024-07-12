@@ -18,6 +18,7 @@ packages = [
   { name = "gleeunit", version = "1.2.0", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "gleeunit", source = "hex", outer_checksum = "F7A7228925D3EE7D0813C922E062BFD6D7E9310F0BEE585D3A42F3307E3CFD13" },
   { name = "glisten", version = "2.0.0", build_tools = ["gleam"], requirements = ["gleam_erlang", "gleam_otp", "gleam_stdlib"], otp_app = "glisten", source = "hex", outer_checksum = "CF3A9383E9BA4A8CBAF2F7B799716290D02F2AC34E7A77556B49376B662B9314" },
   { name = "gramps", version = "2.0.3", build_tools = ["gleam"], requirements = ["gleam_crypto", "gleam_erlang", "gleam_http", "gleam_stdlib"], otp_app = "gramps", source = "hex", outer_checksum = "3CCAA6E081225180D95C79679D383BBF51C8D1FDC1B84DA1DA444F628C373793" },
+  { name = "gwt", version = "0.4.0", build_tools = ["gleam"], requirements = ["birl", "gleam_crypto", "gleam_json", "gleam_stdlib"], otp_app = "gwt", source = "hex", outer_checksum = "6F4EAF7F516F2724F9B5535CE08A542A981C2C8E9D6F387A3B6592582BD7BF84" },
   { name = "hackney", version = "1.20.1", build_tools = ["rebar3"], requirements = ["certifi", "idna", "metrics", "mimerl", "parse_trans", "ssl_verify_fun", "unicode_util_compat"], otp_app = "hackney", source = "hex", outer_checksum = "FE9094E5F1A2A2C0A7D10918FEE36BFEC0EC2A979994CFF8CFE8058CD9AF38E3" },
   { name = "hpack_erl", version = "0.3.0", build_tools = ["rebar3"], requirements = [], otp_app = "hpack", source = "hex", outer_checksum = "D6137D7079169D8C485C6962DFE261AF5B9EF60FBC557344511C1E65E3D95FB0" },
   { name = "idna", version = "6.1.1", build_tools = ["rebar3"], requirements = ["unicode_util_compat"], otp_app = "idna", source = "hex", outer_checksum = "92376EB7894412ED19AC475E4A86F7B413C1B9FBB5BD16DCCD57934157944CEA" },
@@ -41,8 +42,9 @@ gleam_erlang = { version = ">= 0.25.0 and < 1.0.0" }
 gleam_hackney = { version = ">= 1.2.0 and < 2.0.0" }
 gleam_http = { version = ">= 3.6.0 and < 4.0.0" }
 gleam_httpc = { version = ">= 2.2.0 and < 3.0.0" }
-gleam_json = { version = ">= 1.0.1 and < 2.0.0"}
+gleam_json = { version = ">= 1.0.1 and < 2.0.0" }
 gleam_stdlib = { version = ">= 0.34.0 and < 2.0.0" }
 gleeunit = { version = ">= 1.0.0 and < 2.0.0" }
+gwt = { version = ">= 0.4.0 and < 1.0.0"}
 mist = { version = ">= 1.2.0 and < 2.0.0" }
 wisp = { version = ">= 0.15.0 and < 1.0.0" }
