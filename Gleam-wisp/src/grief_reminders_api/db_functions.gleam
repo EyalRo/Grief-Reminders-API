@@ -2,8 +2,6 @@ import gleam/dict
 import gleam/dynamic
 import gleam/io
 import gleam/json.{object, string}
-import gleam/list
-import gleam/option
 import gleam/result
 
 import grief_reminders_api/utils.{send_request}
@@ -20,7 +18,7 @@ pub fn get_user(email: String, password: String) {
   let response = result.unwrap(data, "{error: send_request}")
 
   use json <- json.decode(response)
-  let all_docs =
+  let _all_docs =
     json
     |> dynamic.dict(dynamic.string, dynamic.dynamic)
     |> result.unwrap(dict.new())

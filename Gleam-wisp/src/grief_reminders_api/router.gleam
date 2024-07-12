@@ -1,5 +1,3 @@
-import gleam/dict
-import gleam/dynamic
 import gleam/http.{Get}
 import gleam/result
 import gleam/string_builder
