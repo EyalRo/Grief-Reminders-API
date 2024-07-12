@@ -1,4 +1,6 @@
-import gleam/json.{type Json, object, string}
+import gleam/json.{object, string}
+import gleam/result
+
 import grief_reminders_api/utils.{send_request}
 
 pub fn get_user(email: String, password: String) {
@@ -9,8 +11,7 @@ pub fn get_user(email: String, password: String) {
         object([#("email", string(email)), #("password", string(password))]),
       ),
     ])
-
-  let resp = send_request("_find", params)
-
-  Ok(resp)
+  let data = send_request("_find", params)
+  let user = result.unwrap(data, "{error: send_request}")
+  Ok(user)
 }

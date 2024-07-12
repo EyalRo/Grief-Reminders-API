@@ -1,4 +1,5 @@
-import gleam/http.{Get, Post}
+import gleam/http.{Get}
+import gleam/io
 
 import gleam/result
 import gleam/string_builder
@@ -30,14 +31,11 @@ fn home_page(req: Request) -> Response {
 
 fn get_token(req: Request) -> Response {
   use <- wisp.require_method(req, Get)
-  let data = get_user("email", "password")
+  let data = get_user("test@test.com", "test@test.com")
+  let _ = io.debug(data)
+  let user = result.unwrap(data, "{error: get_user}")
 
-  let datastring =
-    result.lazy_unwrap(result.lazy_unwrap(data, fn() { Ok("No Data") }), fn() {
-      "No Data"
-    })
-
-  let html = string_builder.from_string(datastring)
+  let html = string_builder.from_string(user)
   wisp.ok()
   |> wisp.html_body(html)
 }

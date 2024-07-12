@@ -1,10 +1,9 @@
 import dot_env as dot
 import dot_env/env
 import gleam/hackney
-import gleam/http.{Get, Post}
+import gleam/http.{Post}
 import gleam/http/request
-import gleam/io
-import gleam/json.{type Json, array, int, null, object, string}
+import gleam/json.{type Json}
 import gleam/result.{try}
 
 pub fn send_request(path: String, params: Json) {
@@ -28,7 +27,6 @@ pub fn send_request(path: String, params: Json) {
     |> request.prepend_header("Content-Type", "application/json")
     |> request.set_method(Post)
     |> request.set_body(db_query)
-    |> io.debug
     |> hackney.send,
   )
 
