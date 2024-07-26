@@ -1,0 +1,15 @@
+{
+  "name": "js-quick-n-dirty",
+  "scripts": {
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.12.0",
+    "arangojs": "^8.8.1",
+    "hono": "^4.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "tsx": "^4.7.1"
+  }
+}
