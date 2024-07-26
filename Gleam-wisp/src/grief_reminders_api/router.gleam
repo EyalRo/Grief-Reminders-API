@@ -1,4 +1,6 @@
 import gleam/http.{Get}
+import gleam/json
+import gleam/list
 import gleam/result
 import gleam/string_builder
 import grief_reminders_api/web
@@ -29,12 +31,11 @@ fn home_page(req: Request) -> Response {
 
 fn get_token(req: Request) -> Response {
   use <- wisp.require_method(req, Get)
-  let data = get_user("test@test.com", "test@test.com")
-  let user =
-    data
-    |> result.unwrap("don't worry this is actually okay")
+  let data =
+    get_user("test@test.com", "test@test.com")
+    |> result.unwrap(list.new())
 
-  let html = string_builder.from_string(user)
+  let html = string_builder.from_string("data")
   wisp.ok()
   |> wisp.html_body(html)
 }
