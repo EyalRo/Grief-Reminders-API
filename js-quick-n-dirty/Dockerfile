@@ -1,8 +1,8 @@
-# syntax=docker/dockerfile:1
-
-FROM node:lts-slim
-WORKDIR /app
+FROM node:alpine
+WORKDIR /usr/app
+COPY package.json .
+RUN npm install\
+    && npm install typescript -g
 COPY . .
-RUN npm install --omit=dev
-CMD ["npx", "tsx", "src/index.ts"]
-EXPOSE 3000
+RUN tsc
+CMD ["node", "./dist/server.js"]
