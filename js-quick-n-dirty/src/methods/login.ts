@@ -17,10 +17,7 @@ const login = new Hono<{ Variables: Variables }>();
 login.use(`*`, cors());
 
 login.post("/", async (c) => {
-  const body = {
-    email: "test@test.test",
-    password: "test",
-  };
+  const body = await c.req.json();
 
   // gather required params
   const email = body.email;
@@ -31,11 +28,9 @@ login.post("/", async (c) => {
     .update(password)
     .getHash("HEX");
 
-  console.log(hash);
-
   // search for user
   const foundItem = db.findUnique({
-    where: { email: email },
+    where: { email: email, hash: hash },
   });
 
   // generate the token
