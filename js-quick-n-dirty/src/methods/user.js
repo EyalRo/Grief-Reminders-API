@@ -1,12 +1,14 @@
-import { Hono } from "hono";
-import { jwt } from "hono/jwt";
-import { cors } from "hono/cors";
-import { HTTPException } from "hono/http-exception";
-import { NoSQLDatabase } from "artia.db";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const hono_1 = require("hono");
+const jwt_1 = require("hono/jwt");
+const cors_1 = require("hono/cors");
+const http_exception_1 = require("hono/http-exception");
+const artia_db_1 = require("artia.db");
 const secret = "it-is-very-secret"; // TODO: use environment vars instead
-const db = new NoSQLDatabase("dev_data.json");
-const user = new Hono();
-user.use(`*`, cors());
+const db = new artia_db_1.NoSQLDatabase("dev_data.json");
+const user = new hono_1.Hono();
+user.use(`*`, (0, cors_1.cors)());
 // Before jwt middleware => does not require jwt
 user.post("/", async (c) => {
     const body = await c.req.json();
@@ -18,12 +20,12 @@ user.post("/", async (c) => {
         db.create({ create: body });
     }
     else {
-        throw new HTTPException(401, {
+        throw new http_exception_1.HTTPException(401, {
             message: "user already exists",
         });
     }
 });
-user.use(`*`, jwt({ secret: secret }));
+user.use(`*`, (0, jwt_1.jwt)({ secret: secret }));
 user.get("/", (c) => {
     const payload = c.get("jwtPayload").user;
     return c.json(payload);
@@ -37,7 +39,7 @@ user.put("/", async (c) => {
         return c.json(body);
     }
     else {
-        throw new HTTPException(401, { message: "user not valid" });
+        throw new http_exception_1.HTTPException(401, { message: "user not valid" });
     }
 });
 user.delete("/", async (c) => {
@@ -49,10 +51,10 @@ user.delete("/", async (c) => {
         return c.text("deleted");
     }
     else {
-        throw new HTTPException(401, { message: "user not valid" });
+        throw new http_exception_1.HTTPException(401, { message: "user not valid" });
     }
 });
-export default user;
+exports.default = user;
 const id_valid = (body_id, user_id) => {
     return body_id === user_id;
 };

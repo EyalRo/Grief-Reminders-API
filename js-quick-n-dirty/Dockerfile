@@ -5,4 +5,4 @@ RUN npm install\
     && npm install typescript -g
 COPY . .
 RUN tsc
-CMD ["node", "./dist/server.js"]
+CMD ["node", "./src/index.js"]

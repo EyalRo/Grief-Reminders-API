@@ -5,7 +5,8 @@
       "es2015",
       "dom"
     ],
-    "moduleResolution": "Bundler",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
   }
