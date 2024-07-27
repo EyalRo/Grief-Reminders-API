@@ -1,5 +1,8 @@
 {
   "name": "js-quick-n-dirty",
+  "compilerOptions": {
+    "esModuleInterop": true
+  },
   "scripts": {
     "dev": "tsx watch src/index.ts"
   },
@@ -11,6 +14,9 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
-    "tsx": "^4.7.1"
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4"
   }
 }

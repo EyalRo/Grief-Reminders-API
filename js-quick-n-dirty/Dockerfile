@@ -4,5 +4,5 @@ FROM node:lts-slim
 WORKDIR /app
 COPY . .
 RUN npm install --omit=dev
-CMD ["node", "src/index.ts"]
+CMD ["npx", "tsx", "src/index.ts"]
 EXPOSE 3000
