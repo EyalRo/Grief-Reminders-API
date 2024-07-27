@@ -1,34 +1,19 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
-import { jwt } from "hono/jwt";
-import type { JwtVariables } from "hono/jwt";
 import { cors } from "hono/cors";
 
 import login from "./methods/login";
+import user from "./methods/user";
 
-type Variables = JwtVariables;
-
-const app = new Hono<{ Variables: Variables }>();
+const app = new Hono();
 
 app.use(`*`, cors());
-///
-app.use(
-  "/testjwt",
-  jwt({
-    secret: "it-is-very-secret",
-  })
-);
-///
 
 app.route("/login", login);
+app.route("/user", user);
 
 app.get("/", (c) => {
   return c.text("Hello!");
-});
-
-app.get("/testjwt", (c) => {
-  const payload = c.get("jwtPayload");
-  return c.json(payload);
 });
 
 const port = 3000;

@@ -17,17 +17,26 @@ const login = new Hono<{ Variables: Variables }>();
 login.use(`*`, cors());
 
 login.post("/", async (c) => {
-  const body = { email: "test@test.test", password: "test" };
+  const body = {
+    email: "test@test.test",
+    password: "test",
+  };
 
   // gather required params
   const email = body.email;
   const password = body.password;
 
   // generate password hash
-  const hash = new jsSHA("SHA-1", "TEXT").update(password).getHash("HEX");
+  const hash = new jsSHA("SHA-1", "TEXT")
+    .update(password)
+    .getHash("HEX");
+
+  console.log(hash);
 
   // search for user
-  const foundItem = db.findUnique({ where: { email: email } });
+  const foundItem = db.findUnique({
+    where: { email: email },
+  });
 
   // generate the token
   const payload = {
