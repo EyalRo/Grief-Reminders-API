@@ -4,9 +4,17 @@ import { cors } from "hono/cors";
 
 import login from "./methods/login";
 import user from "./methods/user";
+import { time } from "console";
 
 const app = new Hono();
-
+app.use(async (c, next) => {
+  const now = new Date();
+  const currentDateTime = now.toLocaleString();
+  console.log(
+    `${currentDateTime} - API request: "${c.req.path}"`
+  );
+  await next();
+});
 app.use(`*`, cors());
 
 app.route("/login", login);
