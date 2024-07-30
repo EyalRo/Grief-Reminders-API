@@ -5,6 +5,7 @@ import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
 
 import { NoSQLDatabase } from "artia.db";
+import { prettyJSON } from "hono/pretty-json";
 
 const secret = "it-is-very-secret"; // TODO: use environment vars instead
 type Variables = JwtVariables;
@@ -13,7 +14,7 @@ const db = new NoSQLDatabase("dev_data.json");
 
 const user = new Hono<{ Variables: Variables }>();
 
-user.use(`*`, cors());
+user.use(prettyJSON());
 
 // Before jwt middleware => does not require jwt
 user.post("/", async (c) => {
@@ -26,6 +27,7 @@ user.post("/", async (c) => {
 
   if (foundItem === null) {
     db.create({ create: body });
+    return c.json(body);
   } else {
     throw new HTTPException(401, {
       message: "user already exists",

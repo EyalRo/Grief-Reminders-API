@@ -4,7 +4,9 @@ import { cors } from "hono/cors";
 
 import login from "./methods/login";
 import user from "./methods/user";
-import { time } from "console";
+import { timeout } from "hono/timeout";
+import { logger } from "hono/logger";
+import { compress } from "hono/compress";
 
 const app = new Hono();
 
@@ -18,8 +20,11 @@ app.use(async (c, next) => {
   await next();
 });
 
-// CORS middleware
-app.use(`*`, cors());
+// Built-in middleware
+app.use(cors());
+app.use(logger());
+app.use(compress());
+app.use(timeout(5000));
 
 // Routes
 app.route("/login", login);
