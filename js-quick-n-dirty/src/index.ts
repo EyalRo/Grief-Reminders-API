@@ -10,16 +10,6 @@ import { compress } from "hono/compress";
 
 const app = new Hono();
 
-// Console Logging Middleware
-app.use(async (c, next) => {
-  const now = new Date();
-  const currentDateTime = now.toLocaleString();
-  console.log(
-    `${currentDateTime} - API request: "${c.req.path}"`
-  );
-  await next();
-});
-
 // Built-in middleware
 app.use(cors());
 app.use(logger());
